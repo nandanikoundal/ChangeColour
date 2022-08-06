@@ -2,9 +2,6 @@ package com.nandani.changecolour
 
 
 interface ActivityInterface {
-    fun activityInterface()
-
-
+    fun activityInterface(color:Int, i:Int)
 
 }
-

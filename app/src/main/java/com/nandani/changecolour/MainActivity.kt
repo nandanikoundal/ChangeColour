@@ -1,50 +1,41 @@
 package com.nandani.changecolour
 
-import android.annotation.SuppressLint
-import android.graphics.Color.blue
-import android.graphics.Color.red
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.FragmentContainer
-import androidx.fragment.app.FragmentContainerView
-import com.nandani.changecolour.R.color.green
-import com.nandani.changecolour.R.id.fragmentContainerView
+import androidx.fragment.app.Fragment
+import com.nandani.changecolour.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnCallFragment : Button
-    lateinit var activityInterface: ActivityInterface
-    lateinit var btnalert_Dialog: Button
-    lateinit var fragmentContainerView : FragmentContainerView
-    var c = 0
-    @SuppressLint("ResourceAsColor")
+    lateinit var binding : ActivityMainBinding
+    lateinit var activityInterface :ActivityInterface
+    var i=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        btnCallFragment=findViewById(R.id.btnCallFragment)
-        btnalert_Dialog =findViewById(R.id.btnalert_Dialog )
-        fragmentContainerView =findViewById(R.id.fragmentContainerView)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnalert_Dialog.setOnClickListener{
-            c++
-            activityInterface.activityInterface()
-            var alertDialog= AlertDialog.Builder(this)
-            alertDialog.setTitle("Title")
-            alertDialog.setMessage("Alert dialog message")
-            alertDialog.setPositiveButton("Red"){_,_->
-                fragmentContainerView.setBackgroundResource(R.color.red)
+        binding.btn1.setOnClickListener {
+            var alertDialog = AlertDialog.Builder(this)
+            alertDialog.setTitle("Select Color")
+            alertDialog.setMessage("Select a color that you want to set as fragment background")
+            alertDialog.setPositiveButton("Blue") { _, _ ->
+                i++
+                activityInterface.activityInterface(0,i)
             }
-            alertDialog.setNegativeButton("Green"){_,_->
-                fragmentContainerView.setBackgroundColor(R.color.green)
+            alertDialog.setNegativeButton("Red") { _, _ ->
+                i++
+                activityInterface.activityInterface(1,i)
             }
-            alertDialog.setNeutralButton("Blue"){_,_->
-                fragmentContainerView.setBackgroundColor(R.color.blue)
+            alertDialog.setNeutralButton("green") { _, _ ->
+                i++
+                activityInterface.activityInterface(2,i)
             }
             alertDialog.show()
+
         }
     }
 }
-
 
